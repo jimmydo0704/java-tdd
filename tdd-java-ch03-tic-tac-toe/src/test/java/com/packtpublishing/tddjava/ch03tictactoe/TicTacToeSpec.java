@@ -19,6 +19,7 @@ public class TicTacToeSpec {
         instance = new TicTacToe();
     }
 
+    // Req 1
     @Test
     public void whenXOutsideThenRuntimeException() {
         expectedException.expect(RuntimeException.class);
@@ -38,6 +39,7 @@ public class TicTacToeSpec {
         instance.play(1, 2);
     }
 
+    // Req 2
     @Test
     public void givenFirstPlayerThenNextPlayerX() {
         Assert.assertEquals(TicTacToe.playX, instance.nextPlayer());
@@ -49,10 +51,10 @@ public class TicTacToeSpec {
         Assert.assertEquals(TicTacToe.playO, instance.nextPlayer());
     }
 
+    // Req 3
     @Test
-    public void givenLastPlayerOThenNextPlayerX() {
-        instance.play(1, 1);
-        instance.play(1, 2);
-        Assert.assertEquals(TicTacToe.playX, instance.nextPlayer());
+    public void whenPlayNoWinner() {
+        String actual = instance.play(1, 1);
+        Assert.assertEquals(actual, TicTacToe.NO_WINNER);
     }
 }
