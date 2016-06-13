@@ -14,14 +14,17 @@ public class TicTacToe {
     private char lastPlayer = empty;
 
     public void play(int x, int y) {
-        if(x < 1 || x > 3)
-            throw new RuntimeException("X outside the board");
+        checkAxis(x, "X outside the board");
 
-        if(y < 1 || y > 3)
-            throw new RuntimeException("Y outside the board");
+        checkAxis(y, "Y outside the board");
 
         setBox(x, y);
         lastPlayer = nextPlayer();
+    }
+
+    private void checkAxis(int axis, String errorMsg) {
+        if (axis < 1 || axis > 3)
+            throw new RuntimeException(errorMsg);
     }
 
     private void setBox(int x, int y) {
