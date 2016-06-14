@@ -57,4 +57,24 @@ public class TicTacToeSpec {
         String actual = instance.play(1, 1);
         Assert.assertEquals(actual, TicTacToe.NO_WINNER);
     }
+
+    @Test
+    public void whenPlayAndWholeHorizontalLineThenWinner() {
+        instance.play(1, 1); // X
+        instance.play(1, 2); // O
+        instance.play(2, 1); // X
+        instance.play(2, 2); // O
+        String actual = instance.play(3, 1);
+        Assert.assertEquals(TicTacToe.X_WINNER, actual);
+    }
+
+    @Test
+    public void whenPlayAndWholeVerticalLineThenWinner() {
+        instance.play(1, 1);
+        instance.play(2, 1);
+        instance.play(1, 2);
+        instance.play(2, 2);
+        String actual = instance.play(1, 3);
+        Assert.assertEquals(TicTacToe.X_WINNER, actual);
+    }
 }

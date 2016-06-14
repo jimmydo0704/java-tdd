@@ -5,6 +5,8 @@ package com.packtpublishing.tddjava.ch03tictactoe;
  */
 public class TicTacToe {
     public static final String NO_WINNER = "No winner";
+    public static final String X_WINNER = "X is a winner";
+    public static final String O_WINNER = "O is a winner";
     private static char empty = ' ';
     public static char playX = 'X';
     public static char playO = 'O';
@@ -16,12 +18,26 @@ public class TicTacToe {
 
     public String play(int x, int y) {
         checkAxis(x);
-
         checkAxis(y);
-
-        setBox(x, y);
         lastPlayer = nextPlayer();
+        setBox(x, y);
+        if (isWin())
+            return lastPlayer == playX ? X_WINNER : O_WINNER;
         return NO_WINNER;
+    }
+
+    private boolean isWin() {
+        for(int index = 0; index < 3; index++) {
+            if((board[0][index] == lastPlayer &&
+                    board[1][index] == lastPlayer &&
+                    board[2][index] == lastPlayer) ||
+            (board[index][0] == lastPlayer &&
+                    board[index][1] == lastPlayer &&
+                    board[index][2] == lastPlayer)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void checkAxis(int axis) {
@@ -33,7 +49,7 @@ public class TicTacToe {
         if(board[x - 1][y - 1] != empty)
             throw new RuntimeException("Already occurred");
         else
-            board[x - 1][y - 1] = playX;
+            board[x - 1][y - 1] = lastPlayer;
     }
 
     public char nextPlayer() {
