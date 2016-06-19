@@ -77,4 +77,36 @@ public class TicTacToeSpec {
         String actual = instance.play(1, 3);
         Assert.assertEquals(TicTacToe.X_WINNER, actual);
     }
+
+    @Test
+    public void whenPlayAndTopBottomDiagonalLineThenWinner() {
+        instance.play(1, 1); // X
+        instance.play(1, 2); // O
+        instance.play(2, 2);
+        instance.play(2, 1);
+        Assert.assertEquals(TicTacToe.X_WINNER, instance.play(3, 3));
+    }
+
+    @Test
+    public void whenPlayAndBottomTopDiagonalLineThenWinner() {
+        instance.play(3, 1); // X
+        instance.play(3, 2); // O
+        instance.play(2, 2);
+        instance.play(2, 1);
+        Assert.assertEquals(TicTacToe.X_WINNER, instance.play(1, 3));
+
+    }
+
+    @Test
+    public void whenAllBoxesAreFilledThenDraw() {
+        instance.play(1, 1);
+        instance.play(1, 2);
+        instance.play(1, 3);
+        instance.play(2, 2);
+        instance.play(2, 1);
+        instance.play(2, 3);
+        instance.play(3, 2);
+        instance.play(3, 1);
+        Assert.assertEquals(TicTacToe.DRAW, instance.play(3, 3));
+    }
 }
